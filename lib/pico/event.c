@@ -162,11 +162,13 @@ lua_Integer mlua_event_parse_irq_priority(lua_State* ls, int arg,
     case LUA_TNIL:
         return def;
     case LUA_TNUMBER:
-        lua_Integer priority = luaL_checkinteger(ls, arg);
-        luaL_argcheck(
-            ls, priority <= PICO_SHARED_IRQ_HANDLER_HIGHEST_ORDER_PRIORITY,
-            arg, "invalid priority");
-        return priority;
+        {
+            lua_Integer priority = luaL_checkinteger(ls, arg);
+            luaL_argcheck(
+                ls, priority <= PICO_SHARED_IRQ_HANDLER_HIGHEST_ORDER_PRIORITY,
+                arg, "invalid priority");
+            return priority;
+        }
     default:
         return luaL_typeerror(ls, arg, "integer or nil");
     }

@@ -45,10 +45,12 @@ static lua_Integer get_datetime_field(lua_State* ls, int arg,
         lua_pop(ls, 1);
         return -1;
     case LUA_TNUMBER:
-        int isnum;
-        lua_Integer v = lua_tointegerx(ls, -1, &isnum);
-        lua_pop(ls, 1);
-        if (isnum) return v;
+        {
+            int isnum;
+            lua_Integer v = lua_tointegerx(ls, -1, &isnum);
+            lua_pop(ls, 1);
+            if (isnum) return v;
+        }
         __attribute__((fallthrough));
     default:
         return luaL_error(ls, "invalid datetime %s value", name);
