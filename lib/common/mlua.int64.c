@@ -177,12 +177,14 @@ static int int64___new(lua_State* ls) {
         break;
 
     case LUA_TSTRING:
-        lua_Integer base = luaL_optinteger(ls, 2, 0);
-        luaL_argcheck(ls, base == 0 || (2 <= base && base <= 36), 2,
-                      "base must be 0 or between 2 and 36");
-        if (!mlua_string_to_int64(lua_tostring(ls, 1), base, &value)) {
-            luaL_pushfail(ls);
-            return 1;
+        {
+            lua_Integer base = luaL_optinteger(ls, 2, 0);
+            luaL_argcheck(ls, base == 0 || (2 <= base && base <= 36), 2,
+                          "base must be 0 or between 2 and 36");
+            if (!mlua_string_to_int64(lua_tostring(ls, 1), base, &value)) {
+                luaL_pushfail(ls);
+                return 1;
+            }
         }
         break;
 

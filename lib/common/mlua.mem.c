@@ -169,7 +169,7 @@ static int mod_alloc(lua_State* ls) {
 }
 
 static int mod_mallinfo(lua_State* ls) {
-#ifdef __GLIBC__
+#ifdef __GLIBC___
     struct mallinfo2 info = mallinfo2();
 #else
     struct mallinfo info = mallinfo();
