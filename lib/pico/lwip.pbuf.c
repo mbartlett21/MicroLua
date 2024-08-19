@@ -11,8 +11,6 @@
 #include "mlua/module.h"
 #include "mlua/util.h"
 
-char const mlua_PBUF_name[] = "lwip.PBUF";
-
 struct pbuf** mlua_new_PBUF(lua_State* ls) {
     struct pbuf** pb = lua_newuserdatauv(ls, sizeof(struct pbuf*), 0);
     *pb = NULL;

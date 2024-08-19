@@ -12,8 +12,6 @@
 #include "mlua/module.h"
 #include "mlua/util.h"
 
-char const mlua_NETIF_name[] = "lwip.NETIF";
-
 struct netif** new_NETIF(lua_State* ls) {
     struct netif** netif = lua_newuserdatauv(ls, sizeof(struct netif*), 0);
     *netif = NULL;

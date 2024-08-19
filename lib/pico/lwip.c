@@ -48,8 +48,6 @@ static char const* mlua_lwip_err_str(err_t err) {
     }
 }
 
-char const mlua_IPAddr_name[] = "lwip.IPAddr";
-
 ip_addr_t* mlua_new_IPAddr(lua_State* ls) {
     ip_addr_t* ud = lua_newuserdatauv(ls, sizeof(ip_addr_t), 0);
     luaL_getmetatable(ls, mlua_IPAddr_name);

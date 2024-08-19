@@ -17,6 +17,10 @@
 extern "C" {
 #endif
 
+#define mlua_IPAddr_name "lwip.IPAddr"
+#define mlua_NETIF_name "lwip.NETIF"
+#define mlua_PBUF_name "lwip.PBUF"
+
 // Push fail and an error code, and return the number of pushed values.
 int mlua_lwip_push_err(lua_State* ls, err_t err);
 
@@ -40,14 +44,12 @@ ip_addr_t* mlua_new_IPAddr(lua_State* ls);
 // Get an IPAddr value at the given stack index, or raise an error if the stack
 // entry is not an IPAddr userdata.
 static inline ip_addr_t* mlua_check_IPAddr(lua_State* ls, int arg) {
-    extern char const mlua_IPAddr_name[];
     return luaL_checkudata(ls, arg, mlua_IPAddr_name);
 }
 
 // Get an IPv4 IPAddr value at the given stack index, or raise an error if the
 // stack entry is not an IPv4 IPAddr userdata.
 static inline ip_addr_t* mlua_check_IPAddr4(lua_State* ls, int arg) {
-    extern char const mlua_IPAddr_name[];
     ip_addr_t* addr = luaL_checkudata(ls, arg, mlua_IPAddr_name);
     luaL_argexpected(ls, IP_IS_V4(addr), arg, "IPv4 address");
     return addr;
@@ -56,7 +58,6 @@ static inline ip_addr_t* mlua_check_IPAddr4(lua_State* ls, int arg) {
 // Get an IPv6 IPAddr value at the given stack index, or raise an error if the
 // stack entry is not an IPv6 IPAddr userdata.
 static inline ip_addr_t* mlua_check_IPAddr6(lua_State* ls, int arg) {
-    extern char const mlua_IPAddr_name[];
     ip_addr_t* addr = luaL_checkudata(ls, arg, mlua_IPAddr_name);
     luaL_argexpected(ls, IP_IS_V6(addr), arg, "IPv6 address");
     return addr;
@@ -68,14 +69,12 @@ struct pbuf** mlua_new_PBUF(lua_State* ls);
 // Get a PBUF value at the given stack index, or raise an error if the stack
 // entry is not a PBUF userdata.
 static inline struct pbuf* mlua_check_PBUF(lua_State* ls, int arg) {
-    extern char const mlua_PBUF_name[];
     return *(struct pbuf**)luaL_checkudata(ls, arg, mlua_PBUF_name);
 }
 
 // Get a NETIF value at the given stack index, or raise an error if the stack
 // entry is not a NETIF userdata.
 static inline struct netif* mlua_check_NETIF(lua_State* ls, int arg) {
-    extern char const mlua_NETIF_name[];
     return *(struct netif**)luaL_checkudata(ls, arg, mlua_NETIF_name);
 }
 
